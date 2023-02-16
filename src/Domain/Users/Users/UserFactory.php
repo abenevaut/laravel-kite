@@ -38,4 +38,11 @@ class UserFactory extends Factory
             'email_verified_at' => null,
         ]);
     }
+
+    public function emailWithPrefix(string $prefix)
+    {
+        return $this->state(fn (array $attributes) => [
+            'email' => "{$prefix}-" .fake()->unique()->safeEmail(),
+        ]);
+    }
 }
