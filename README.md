@@ -1,3 +1,3 @@
-# laravel-infrastructure
+# laravel-kite
 
-- [Read more on wiki](https://github.com/abenevaut/laravel-infrastructure/wiki)
+- [Read more on wiki](https://github.com/abenevaut/laravel-kite/wiki)

@@ -10,29 +10,14 @@ use Illuminate\Support\Facades\RateLimiter;
 
 class RouteServiceProvider extends ServiceProvider
 {
-    /**
-     * Register any application services.
-     *
-     * @return void
-     */
-    public function register()
+    public function boot(): void
     {
-        //
+        $this->configureRateLimiting();
+        $this->loadRoutesFrom(__DIR__ . '/../../../routes/webGuest.php');
+        $this->loadRoutesFrom(__DIR__ . '/../../../routes/webAuthenticated.php');
     }
 
-    /**
-     * Bootstrap any application services.
-     *
-     * @return void
-     */
-    public function boot()
-    {
-        $this
-            ->configureRateLimiting()
-            ->loadRoutesFrom(__DIR__ . '/../../../routes/web.php');
-    }
-
-    private function configureRateLimiting(): self
+    private function configureRateLimiting(): void
     {
         RateLimiter::for('login', function (Request $request) {
             return Limit::perMinute(5)
@@ -41,7 +26,5 @@ class RouteServiceProvider extends ServiceProvider
                     throw new TooManyRequestsHttpException($request, $headers, 'Login rate limit exceeded');
                 });
         });
-
-        return $this;
     }
 }
