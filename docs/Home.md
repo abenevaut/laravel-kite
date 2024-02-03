@@ -16,7 +16,7 @@ Make tag `laravel-kite-<semver>` to master to:
 "repositories": [
     {
         "type": "vcs",
-        "url": "git@github.com:abenevaut/laravel-kite.git"
+        "url": "https://github.com/abenevaut/laravel-kite.git"
     }
 ],
 ```
