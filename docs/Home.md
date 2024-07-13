@@ -21,3 +21,17 @@ Make tag `laravel-kite-<semver>` to master to:
 ],
 ```
 
+`bootstrap/providers.php`
+
+```php
+<?php
+
+return [
+
+    // ..
+    
+    abenevaut\Kite\App\Providers\KiteServiceProvider::class,
+    abenevaut\Kite\App\Providers\AuthServiceProvider::class,
+    abenevaut\Kite\App\Providers\RouteServiceProvider::class,
+];
+```

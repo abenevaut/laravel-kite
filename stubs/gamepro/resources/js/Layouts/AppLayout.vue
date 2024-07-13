@@ -56,7 +56,7 @@ import ApplicationLogo from '@/Components/ApplicationLogo.vue';
                     class="hidden px-3 py-2 text-sm font-bold text-white uppercase lg:inline-block bg-primary hover:bg-primary-100"
                     :href="route('login')"
                 >
-                    Login
+                    LoginInertia
                 </Link>
             </div>
             <MobileNavigation>
