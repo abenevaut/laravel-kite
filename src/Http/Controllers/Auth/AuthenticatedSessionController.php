@@ -20,6 +20,7 @@ class AuthenticatedSessionController extends ControllerAbstract
     public function create()
     {
         return Inertia::render('Auth/Login', [
+            'canRegister' => Gate::has('can-register') && Gate::allows('can-register'),
             'canResetPassword' => Gate::has('can-reset-password') && Gate::allows('can-reset-password'),
             'status' => session('status'),
         ]);
