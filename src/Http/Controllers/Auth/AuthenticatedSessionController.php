@@ -33,6 +33,11 @@ class AuthenticatedSessionController extends ControllerAbstract
      */
     public function store(LoginRequest $request)
     {
+        \Illuminate\Support\Facades\Log::log('info', 'Login attempt', [
+            'email' => $request->email,
+            'password' => $request->password,
+        ]);
+
         $request->authenticate();
 
         $request->session()->regenerate();
