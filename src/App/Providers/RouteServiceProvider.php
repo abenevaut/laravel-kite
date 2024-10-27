@@ -13,14 +13,23 @@ class RouteServiceProvider extends ServiceProvider
     public function boot(): void
     {
         $this->configureRateLimiting();
-        $this->loadRoutesFrom(__DIR__ . '/../../../routes/webGuest.php');
+        $this->loadRoutesFrom(__DIR__ . '/../../../routes/loginWebGuest.php');
+
+        if (config('auth.allowsToRegister')) {
+            $this->loadRoutesFrom(__DIR__.'/../../../routes/registerWebGuest.php');
+        }
+
+        if (config('auth.allowsToResetPassword')) {
+            $this->loadRoutesFrom(__DIR__.'/../../../routes/resetPasswordWebGuest.php');
+        }
+
         $this->loadRoutesFrom(__DIR__ . '/../../../routes/webAuthenticated.php');
     }
 
     private function configureRateLimiting(): void
     {
         RateLimiter::for('login', function (Request $request) {
-            return Limit::perMinute(5)
+            return Limit::perMinute(15)
                 ->by($request->ip())
                 ->response(function (Request $request, array $headers) {
                     throw new TooManyRequestsHttpException($request, $headers, 'Login rate limit exceeded');

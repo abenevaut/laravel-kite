@@ -2,6 +2,48 @@
 
 return [
 
+    'canRegister' => env('AUTH_ALLOWS_TO_REGISTER', false),
+    'canResetPassword' => env('AUTH_ALLOWS_TO_RESET_PASSWORD', false),
+
+    /*
+    |--------------------------------------------------------------------------
+    | Authentication Defaults
+    |--------------------------------------------------------------------------
+    |
+    | This option defines the default authentication "guard" and password
+    | reset "broker" for your application. You may change these values
+    | as required, but they're a perfect start for most applications.
+    |
+    */
+
+    'defaults' => [
+        'guard' => env('AUTH_GUARD', 'web'),
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Authentication Guards
+    |--------------------------------------------------------------------------
+    |
+    | Next, you may define every authentication guard for your application.
+    | Of course, a great default configuration has been defined for you
+    | which utilizes session storage plus the Eloquent user provider.
+    |
+    | All authentication guards have a user provider, which defines how the
+    | users are actually retrieved out of your database or other storage
+    | system used by the application. Typically, Eloquent is utilized.
+    |
+    | Supported: "session"
+    |
+    */
+
+    'guards' => [
+        'web' => [
+            'driver' => 'session',
+            'provider' => 'users',
+        ],
+    ],
+
     /*
     |--------------------------------------------------------------------------
     | User Providers
@@ -22,7 +64,7 @@ return [
     'providers' => [
         'users' => [
             'driver' => 'eloquent',
-            'model' => abenevaut\Kite\Domain\Users\Users\User::class,
+            'model' => env('AUTH_MODEL', abenevaut\Kite\Domain\Users\Users\User::class),
         ],
     ],
 
@@ -61,6 +103,6 @@ return [
     |
     */
 
-    'password_timeout' => 10800,
+    'password_timeout' => env('AUTH_PASSWORD_TIMEOUT', 10800),
 
 ];

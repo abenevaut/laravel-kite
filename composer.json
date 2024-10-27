@@ -42,7 +42,9 @@
     "extra": {
         "laravel": {
             "providers": [
-                "abenevaut\\Kite\\App\\Providers\\KiteServiceProvider"
+                "abenevaut\\Kite\\App\\Providers\\KiteServiceProvider",
+                "abenevaut\\Kite\\App\\Providers\\AuthServiceProvider",
+                "abenevaut\\Kite\\App\\Providers\\RouteServiceProvider"
             ]
         }
     }

@@ -4,11 +4,9 @@ namespace abenevaut\Kite\Http\Controllers\Auth;
 
 use abenevaut\Infrastructure\Http\Controllers\ControllerAbstract;
 use abenevaut\Kite\Http\Requests\Auth\LoginRequest;
-use App\Providers\RouteServiceProvider;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
-use Inertia\Inertia;
 
 class AuthenticatedSessionController extends ControllerAbstract
 {
@@ -19,7 +17,7 @@ class AuthenticatedSessionController extends ControllerAbstract
      */
     public function create()
     {
-        return Inertia::render('Auth/Login', [
+        return \Inertia\Inertia::render('Auth/Login', [
             'canRegister' => Gate::has('can-register') && Gate::allows('can-register'),
             'canResetPassword' => Gate::has('can-reset-password') && Gate::allows('can-reset-password'),
             'status' => session('status'),
@@ -41,6 +39,13 @@ class AuthenticatedSessionController extends ControllerAbstract
         $request->authenticate();
 
         $request->session()->regenerate();
+
+        if (
+            class_exists(\Inertia\Inertia::class)
+            && $request->session()->has('url.intended')
+        ) {
+            return \Inertia\Inertia::location(session('url.intended'));
+        }
 
         return redirect()->intended('/');
     }
