@@ -4,8 +4,10 @@ namespace Unit;
 
 use abenevaut\Kite\Http\Exceptions\TooManyRequestsHttpException;
 use Illuminate\Http\Request;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 
+#[CoversClass(TooManyRequestsHttpException::class)]
 class TooManyRequestsHttpExceptionTest extends TestCase
 {
     public function test_default_params(): void
